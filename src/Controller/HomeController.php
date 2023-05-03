@@ -2,21 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Album;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/')]
-    public function home(EntityManagerInterface $entityManager): Response
+    private AlbumRepository $albumRepository;
+    public function __construct(AlbumRepository $albumRepository)
     {
-        $list = $entityManager
-            ->getRepository(Album::class)
-            ->findAll()
-        ;
+        $this->albumRepository = $albumRepository;
+    }
+
+    #[Route('/')]
+    public function home(): Response
+    {
+        $list = $this->albumRepository->findAllDescOrderedByOutDate();
 
         return $this->render(
             'base.html.twig',
