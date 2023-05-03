@@ -1,24 +1,7 @@
-<h2>A écouter</h2>
+<div id="wrapper-stats" class="row m-4">
+    {{ include('stats.html.twig') }}
+</div>
 
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th scope="col">Ecouté ?</th>
-        <th scope="col">Nom album</th>
-        <th scope="col">Artiste</th>
-        <th scope="col">Date de sortie</th>
-        <th scope="col">Durée</th>
-    </tr>
-    </thead>
-    <tbody>
-        {% for album in list %}
-            <tr>
-                <td><input type="checkbox" id="listenedTo" autocomplete="off"></td>
-                <td>{{ album.title }}</td>
-                <td>{{ album.artist }}</td>
-                <td>{{ album.out | format_datetime('short', 'none', locale='fr') }}
-                <td>{{ album.duration }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div id="wrapper-list" class="row m-4">
+    {{ include('list.html.twig') }}
+</div>

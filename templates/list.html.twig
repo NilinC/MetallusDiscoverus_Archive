@@ -1,0 +1,47 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col">17/02/2023</th>
+        </tr>
+    </thead>
+    <tbody>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Ecouté ?</th>
+                <th scope="col">Notes</th>
+                <th scope="col">Nom album</th>
+                <th scope="col">Artiste</th>
+                <th scope="col">Date de sortie</th>
+                <th scope="col">Durée</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for album in list %}
+                <tr>
+                    <td><input type="checkbox" id="listenedTo" autocomplete="off"></td>
+                    <td>
+                        <i class="bi-heart favorite"></i>
+                        <i class="bi-hand-thumbs-up text-"></i>
+                        <i class="bi-hand-thumbs-down"></i>
+                        <i class="bi-bootstrap-reboot"></i>
+                    </td>
+                    <td>{{ album.title }}</td>
+                    <td>{{ album.artist }}</td>
+                    <td>{{ album.out | format_datetime('short', 'none', locale='fr') }}
+                    <td>{{ album.duration }}</td>
+                    <td>
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Actions</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">A ré-écouter</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Supprimer de la liste</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </tbody>
+</table>

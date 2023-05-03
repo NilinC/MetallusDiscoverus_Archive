@@ -13,7 +13,10 @@ class HomeController extends AbstractController
     #[Route('/')]
     public function home(EntityManagerInterface $entityManager): Response
     {
-        $list = $entityManager->getRepository(Album::class)->findAll();
+        $list = $entityManager
+            ->getRepository(Album::class)
+            ->findAll()
+        ;
 
         return $this->render(
             'base.html.twig',
