@@ -6,7 +6,7 @@
         <th scope="col">Nom album</th>
         <th scope="col">Artiste</th>
         <th scope="col">Date de sortie</th>
-        <th scope="col">Durée</th>
+        <th scope="col">Label</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -22,8 +22,8 @@
                 </td>
                 <td>{{ album.title }}</td>
                 <td>{{ album.artist }}</td>
-                <td>{{ album.out | date('d/m/Y') }}</td>
-                <td>{{ album.duration }}</td>
+                <td>{{ album.releaseDate | date('d/m/Y') }}</td>
+                <td>{{ album.label }}</td>
                 <td>
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Actions</a>
                     <ul class="dropdown-menu">

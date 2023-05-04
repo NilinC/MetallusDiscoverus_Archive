@@ -13,12 +13,12 @@ class AlbumRepository extends ServiceEntityRepository
         parent::__construct($registry, Album::class);
     }
 
-    public function findAllDescOrderedByOutDate(): array
+    public function findAllDescOrderedByReleaseDate(): array
     {
         $queryBuilder = $this
             ->createQueryBuilder('a')
-            ->select('a.out', 'a.title', 'a.artist', 'a.songsCount', 'a.duration')
-            ->orderBy('a.out', 'desc')
+            ->select('a.releaseDate', 'a.title', 'a.artist', 'a.genres', 'a.totalTracks', 'a.label')
+            ->orderBy('a.releaseDate', 'desc')
         ;
 
         $query = $queryBuilder->getQuery();
