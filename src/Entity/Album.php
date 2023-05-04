@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use \DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -15,8 +16,8 @@ class Album
     private string $title;
     #[ORM\Column(length: 255)]
     private string $artist;
-    #[ORM\Column(length: 255)]
-    private string $out;
+    #[ORM\Column(type: 'date')]
+    private DateTime $out;
     #[ORM\Column]
     private int $songsCount;
     #[ORM\Column(length: 255)]
@@ -30,13 +31,13 @@ class Album
      * @param int $id
      * @param string $title
      * @param string $artist
-     * @param string $out
+     * @param DateTime $out
      * @param int $songsCount
      * @param string $duration
      * @param string $label
      * @param array $songs
      */
-    public function __construct(int $id, string $title, string $artist, string $out, int $songsCount, string $duration, string $label, array $songs)
+    public function __construct(int $id, string $title, string $artist, DateTime $out, int $songsCount, string $duration, string $label, array $songs)
     {
         $this->id = $id;
         $this->title = $title;
@@ -89,17 +90,17 @@ class Album
     }
 
     /**
-     * @return string
+     * @return DateTime
      */
-    public function getOut(): string
+    public function getOut(): DateTime
     {
         return $this->out;
     }
 
     /**
-     * @param string $out
+     * @param DateTime $out
      */
-    public function setOut(string $out): void
+    public function setOut(DateTime $out): void
     {
         $this->out = $out;
     }
