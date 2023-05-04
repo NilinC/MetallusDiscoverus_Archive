@@ -18,7 +18,7 @@ class HomeController extends AbstractController
     #[Route('/')]
     public function home(): Response
     {
-        $list = $this->albumRepository->findAllDescOrderedByOutDate();
+        $list = $this->albumRepository->findAllDescOrderedByReleaseDate();
 
         return $this->render(
             'base.html.twig',

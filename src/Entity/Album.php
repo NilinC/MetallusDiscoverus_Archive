@@ -14,39 +14,37 @@ class Album
     private int $id;
     #[ORM\Column(length: 255)]
     private string $title;
+    #[ORM\OneToMany(mappedBy: 'album', targetEntity: Image::class)]
+    private array $images;
     #[ORM\Column(length: 255)]
     private string $artist;
     #[ORM\Column(type: 'date')]
-    private DateTime $out;
+    private DateTime $releaseDate;
     #[ORM\Column]
-    private int $songsCount;
-    #[ORM\Column(length: 255)]
-    private string $duration;
+    private int $totalTracks;
     #[ORM\Column(length: 255)]
     private string $label;
     #[ORM\Column]
-    private array $songs;
+    private string $genres;
 
     /**
-     * @param int $id
      * @param string $title
+     * @param array $images
      * @param string $artist
-     * @param DateTime $out
-     * @param int $songsCount
-     * @param string $duration
+     * @param DateTime $releaseDate
+     * @param int $totalTracks
      * @param string $label
-     * @param array $songs
+     * @param string $genres
      */
-    public function __construct(int $id, string $title, string $artist, DateTime $out, int $songsCount, string $duration, string $label, array $songs)
+    public function __construct(string $title, array $images, string $artist, DateTime $releaseDate, int $totalTracks, string $label, string $genres)
     {
-        $this->id = $id;
         $this->title = $title;
+        $this->images = $images;
         $this->artist = $artist;
-        $this->out = $out;
-        $this->songsCount = $songsCount;
-        $this->duration = $duration;
+        $this->releaseDate = $releaseDate;
+        $this->totalTracks = $totalTracks;
         $this->label = $label;
-        $this->songs = $songs;
+        $this->genres = $genres;
     }
 
     /**
@@ -74,6 +72,23 @@ class Album
     }
 
     /**
+     * @return array
+     */
+    public function getImages(): array
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param array $images
+     */
+    public function setImages(array $images): void
+    {
+        $this->images = $images;
+    }
+
+
+    /**
      * @return string
      */
     public function getArtist(): string
@@ -92,49 +107,33 @@ class Album
     /**
      * @return DateTime
      */
-    public function getOut(): DateTime
+    public function getReleaseDate(): DateTime
     {
-        return $this->out;
+        return $this->releaseDate;
     }
 
     /**
-     * @param DateTime $out
+     * @param DateTime $releaseDate
      */
-    public function setOut(DateTime $out): void
+    public function setReleaseDate(DateTime $releaseDate): void
     {
-        $this->out = $out;
+        $this->releaseDate = $releaseDate;
     }
 
     /**
      * @return int
      */
-    public function getSongsCount(): int
+    public function getTotalTracks(): int
     {
-        return $this->songsCount;
+        return $this->totalTracks;
     }
 
     /**
-     * @param int $songsCount
+     * @param int $totalTracks
      */
-    public function setSongsCount(int $songsCount): void
+    public function setTotalTracks(int $totalTracks): void
     {
-        $this->songsCount = $songsCount;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDuration(): string
-    {
-        return $this->duration;
-    }
-
-    /**
-     * @param string $duration
-     */
-    public function setDuration(string $duration): void
-    {
-        $this->duration = $duration;
+        $this->totalTracks = $totalTracks;
     }
 
     /**
@@ -154,18 +153,18 @@ class Album
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getSongs(): array
+    public function getGenres(): string
     {
-        return $this->songs;
+        return $this->genres;
     }
 
     /**
-     * @param array $songs
+     * @param string $genres
      */
-    public function setSongs(array $songs): void
+    public function setGenres(string $genres): void
     {
-        $this->songs = $songs;
+        $this->genres = $genres;
     }
 }
