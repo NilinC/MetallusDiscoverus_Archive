@@ -26,6 +26,8 @@ class Album
     private string $label;
     #[ORM\Column]
     private string $genres;
+    #[ORM\Column(type: 'date', nullable: true)]
+    private ?DateTime $listenedAt;
 
     /**
      * @param string $title
@@ -45,6 +47,7 @@ class Album
         $this->totalTracks = $totalTracks;
         $this->label = $label;
         $this->genres = $genres;
+       $this->listenedAt = null;
     }
 
     /**
@@ -166,5 +169,21 @@ class Album
     public function setGenres(string $genres): void
     {
         $this->genres = $genres;
+    }
+
+    /**
+     * @return ?DateTime
+     */
+    public function getListenedAt(): ?DateTime
+    {
+        return $this->listenedAt;
+    }
+
+    /**
+     * @param DateTime $listenedAt
+     */
+    public function setListenedAt(DateTime $listenedAt): void
+    {
+        $this->listenedAt = $listenedAt;
     }
 }
