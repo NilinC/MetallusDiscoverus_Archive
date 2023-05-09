@@ -3,31 +3,31 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Albums ajoutés à la liste d'écoute</h5>
-                <h1>2</h1>
+                <h1>{{ nb_albums_to_listen }}</h1>
             </div>
         </div>
     </div>
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Albums écoutés en mai 2023</h5>
-                <h1>1</h1>
+                <h5 class="card-title">Albums écoutés en {{ "now" | format_datetime(pattern='MMMM yyyy', locale='fr') }}</h5>
+                <h1>{{ nb_albums_listened_during_current_month }}</h1>
             </div>
         </div>
     </div>
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Albums écoutés depuis janvier 2023</h5>
-                <h1>25</h1>
+                <h5 class="card-title">Albums écoutés depuis janvier {{ "now" | format_datetime(pattern='yyyy', locale='fr') }}</h5>
+                <h1>{{ nb_albums_listened_since_start_of_year }}</h1>
             </div>
         </div>
     </div>
     <div class="col">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Albums sortis en mai 2023</h5>
-                <h1>30</h1>
+                <h5 class="card-title">Albums sortis en {{ "now" | format_datetime(pattern='MMMM yyyy', locale='fr') }}</h5>
+                <h1>{{ nb_albums_released_during_current_month }}</h1>
             </div>
         </div>
     </div>
