@@ -1,0 +1,24 @@
+.favorite {
+    color: #ff3335;
+}
+
+.liked {
+    color: #44b5ff;
+}
+
+.disliked {
+    color: #000000;
+}
+
+.listenAgain {
+    color: #98ff9b;
+}
+
+.logo-resize {
+    width: 50%;
+    height: auto;
+}
+
+.grey-font {
+    color: #9aa0a6;
+}

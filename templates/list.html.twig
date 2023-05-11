@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-hover">
     <thead>
     <tr>
         <th scope="col">Ecouté ?</th>
@@ -10,10 +10,16 @@
         <th scope="col">Actions</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="table-group-divider">
         {% for album in list %}
-            <tr>
-                <td><input type="checkbox" id="listenedTo" autocomplete="off"></td>
+            {% set selected = false %}
+
+            {% if album.listenedAt is not null %}
+                {% set selected = true %}
+            {% endif %}
+
+            <tr {% if selected %} class="grey-font" {% endif %}>
+                <td><input type="checkbox" name="listenedTo" autocomplete="off" {% if selected %}checked{% endif %}></td>
                 <td>
                     <i class="bi-heart favorite"></i>
                     <i class="bi-hand-thumbs-up text-"></i>
