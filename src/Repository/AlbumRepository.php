@@ -18,7 +18,7 @@ class AlbumRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this
             ->createQueryBuilder('a')
-            ->select('a.releaseDate', 'a.title', 'a.artist', 'a.genres', 'a.totalTracks', 'a.label', 'a.listenedAt')
+            ->select('a.releaseDate', 'a.id', 'a.title', 'a.artist', 'a.genres', 'a.totalTracks', 'a.label', 'a.listenedAt')
             ->orderBy('a.listenedAt, a.releaseDate', 'desc')
         ;
 

@@ -11,6 +11,5 @@ checkboxes.forEach(checkbox => {
             checkbox.removeAttribute("checked");
             parent.classList.remove('grey-font');
         }
-
     });
 });

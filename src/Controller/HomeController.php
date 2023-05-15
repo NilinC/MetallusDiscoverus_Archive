@@ -9,14 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    private AlbumRepository $albumRepository;
-    public function __construct(AlbumRepository $albumRepository)
-    {
-        $this->albumRepository = $albumRepository;
-    }
+    public function __construct(private readonly AlbumRepository $albumRepository) {}
 
-    #[Route('/')]
-    public function home(): Response
+    #[Route('/', name: 'app_homepage')]
+    public function homeAction(): Response
     {
         $list = $this->albumRepository->findAllDescOrderedByReleaseDate();
 
