@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use \DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -15,7 +16,7 @@ class Album
     #[ORM\Column(length: 255)]
     private string $title;
     #[ORM\OneToMany(mappedBy: 'album', targetEntity: Image::class)]
-    private array $images;
+    private Collection $images;
     #[ORM\Column(length: 255)]
     private string $artist;
     #[ORM\Column(type: 'date')]
@@ -38,7 +39,7 @@ class Album
      * @param string $label
      * @param string $genres
      */
-    public function __construct(string $title, array $images, string $artist, DateTime $releaseDate, int $totalTracks, string $label, string $genres)
+    public function __construct(string $title, Collection $images, string $artist, DateTime $releaseDate, int $totalTracks, string $label, string $genres)
     {
         $this->title = $title;
         $this->images = $images;
@@ -75,17 +76,17 @@ class Album
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getImages(): array
+    public function getImages(): Collection
     {
         return $this->images;
     }
 
     /**
-     * @param array $images
+     * @param Collection $images
      */
-    public function setImages(array $images): void
+    public function setImages(Collection $images): void
     {
         $this->images = $images;
     }
@@ -180,9 +181,9 @@ class Album
     }
 
     /**
-     * @param DateTime $listenedAt
+     * @param ?DateTime $listenedAt
      */
-    public function setListenedAt(DateTime $listenedAt): void
+    public function setListenedAt(?DateTime $listenedAt): void
     {
         $this->listenedAt = $listenedAt;
     }

@@ -4,12 +4,13 @@ namespace App\Repository;
 
 use App\Entity\Album;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 class AlbumRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private readonly EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Album::class);
     }
@@ -18,8 +19,8 @@ class AlbumRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this
             ->createQueryBuilder('a')
-            ->select('a.releaseDate', 'a.title', 'a.artist', 'a.genres', 'a.totalTracks', 'a.label')
-            ->orderBy('a.releaseDate', 'desc')
+            ->select('a.releaseDate', 'a.id', 'a.title', 'a.artist', 'a.genres', 'a.totalTracks', 'a.label', 'a.listenedAt')
+            ->orderBy('a.listenedAt, a.releaseDate', 'desc')
         ;
 
         $query = $queryBuilder->getQuery();
@@ -82,5 +83,28 @@ class AlbumRepository extends ServiceEntityRepository
         $query = $queryBuilder->getQuery();
 
         return $query->getResult(Query::HYDRATE_SINGLE_SCALAR);
+    }
+
+    public function updateAnAlbumListenedAtValue(int $id, $requestValue): ?Album
+    {
+        $album = $this->findOneBy(['id' => $id]);
+
+        if (null === $album) {
+            throw new \Exception(sprintf('L\'album avec l\'id %d n\'existe pas', $id));
+        }
+
+        $param = json_decode($requestValue);
+
+        $listenedAt = null;
+        if (null !== $param->listenedAt) {
+            $listenedAt = new \DateTime($param->listenedAt);
+        }
+
+        $album->setListenedAt($listenedAt);
+
+        $this->entityManager->persist($album);
+        $this->entityManager->flush();
+
+        return $album;
     }
 }
