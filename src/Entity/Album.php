@@ -47,7 +47,7 @@ class Album
         $this->totalTracks = $totalTracks;
         $this->label = $label;
         $this->genres = $genres;
-       $this->listenedAt = null;
+        $this->listenedAt = null;
     }
 
     /**
@@ -89,7 +89,6 @@ class Album
     {
         $this->images = $images;
     }
-
 
     /**
      * @return string
